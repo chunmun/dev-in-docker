@@ -106,10 +106,10 @@ alias tm="tmux -2u"
 
 # . ~/.zshrc.corenlp
 
-export CUDA_ROOT=/usr/local/bin/cuda/bin
+#export CUDA_ROOT=/usr/local/bin/cuda/bin
 
 # Go stuff
-export GOPATH=$HOME/git/golangfun
+#export GOPATH=$HOME/git/golangfun
 
 # For Stanford NLP
 
@@ -120,4 +120,4 @@ export GOPATH=$HOME/git/golangfun
 # gsettings set org.gnome.desktop.background show-desktop-icons false
 
 
-. ~/torch/install/bin/torch-activate
+#. ~/torch/install/bin/torch-activate

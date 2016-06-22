@@ -20,12 +20,12 @@ Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
 " Plugin 'user/L9', {'name': 'newL9'}
 
@@ -47,6 +47,9 @@ Plugin 'pangloss/vim-javascript'
 Bundle 'scrooloose/syntastic'
 Plugin 'vim-scripts/taglist.vim.git'
 Plugin 'vim-scripts/cscope.vim.git'
+Plugin 'ctrlpvim/ctrlp.vim.git'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'ivalkeen/vim-ctrlp-tjump'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -83,7 +86,7 @@ let g:solarized_italic = 1
 let g:solarized_contrast = "normal"
 let g:solarized_visibility= "normal"
 " ------------------------------------------------
-silent! syntax enable
+syntax enable
 set t_Co=256
 set background=dark
 silent! colorscheme solarized
@@ -123,7 +126,7 @@ highlight GitGutterDelete ctermfg=red guifg=darkred
 highlight GitGutterChangeDelete ctermfg=yellow guifg=darkyellow
 
 " YCM
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_global_ycm_extra_conf'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 
@@ -164,3 +167,29 @@ set backspace=indent,eol,start
 " Syntastic checkers
 let g:syntastic_javascript_checkers = ['jshint']
 
+" SilverSearcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" CtrlPTjump
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+nnoremap <leader>t :CtrlPTag<cr>
+
+" PyMatcher for CtrlP
+if !has('python') && !has('python3')
+    echo 'In order to use pymatcher plugin, you need +python compiled vim'
+else
+    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+endif

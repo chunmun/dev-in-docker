@@ -28,6 +28,7 @@ RUN apt-get install -y \
  python3-pip \
  ssh \
  sudo \
+ silversearcher-ag \
  tmux \
  unzip \
  vim-nox \
